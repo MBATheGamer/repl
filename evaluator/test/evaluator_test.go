@@ -9,6 +9,11 @@ import (
 	"github.com/MBATheGamer/repl/evaluator"
 )
 
+type TestIntegerExpression struct {
+	input    string
+	expected int64
+}
+
 func testEval(input string) object.Object {
 	var lexer = lexer.New(input)
 	var parser = parser.New(lexer)
