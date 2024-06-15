@@ -7,6 +7,7 @@ import (
 
 	"github.com/MBATheGamer/lang_core/lexer"
 	"github.com/MBATheGamer/lang_core/parser"
+	"github.com/MBATheGamer/repl/evaluator"
 )
 
 func Start(input io.Reader, output io.Writer) {
@@ -33,7 +34,11 @@ func Start(input io.Reader, output io.Writer) {
 			continue
 		}
 
-		io.WriteString(output, program.String())
-		io.WriteString(output, "\n")
+		var evaluated = evaluator.Eval(program)
+
+		if evaluated != nil {
+			io.WriteString(output, evaluated.Inspect())
+			io.WriteString(output, "\n")
+		}
 	}
 }
