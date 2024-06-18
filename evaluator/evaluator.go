@@ -21,13 +21,3 @@ func Eval(node ast.Node) object.Object {
 	}
 	return nil
 }
-
-func evalStatements(statements []ast.Statement) object.Object {
-	var result object.Object
-
-	for _, statement := range statements {
-		result = Eval(statement)
-	}
-
-	return result
-}
