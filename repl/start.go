@@ -23,6 +23,10 @@ func Start(input io.Reader, output io.Writer) {
 
 		var line = scanner.Text()
 
+		if line == "exit" || line == ".exit" {
+			return
+		}
+
 		var lexer = lexer.New(line)
 
 		var parser = parser.New(lexer)
