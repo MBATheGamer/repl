@@ -22,6 +22,10 @@ func Eval(node ast.Node) object.Object {
 	case *ast.IfExpression:
 		return evalIfExpression(node)
 
+	case *ast.ReturnStatement:
+		var value = Eval(node.ReturnValue)
+		return &object.ReturnValue{Value: value}
+
 	case *ast.ExpressionStatement:
 		return Eval(node.Expression)
 
