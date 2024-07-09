@@ -17,7 +17,7 @@ func Eval(node ast.Node) object.Object {
 		return evalProgram(node)
 
 	case *ast.BlockStatement:
-		return evalStatements(node.Statements)
+		return evalBlockStatement(node)
 
 	case *ast.IfExpression:
 		return evalIfExpression(node)
