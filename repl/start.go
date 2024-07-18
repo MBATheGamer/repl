@@ -6,12 +6,14 @@ import (
 	"io"
 
 	"github.com/MBATheGamer/lang_core/lexer"
+	"github.com/MBATheGamer/lang_core/object"
 	"github.com/MBATheGamer/lang_core/parser"
 	"github.com/MBATheGamer/repl/evaluator"
 )
 
 func Start(input io.Reader, output io.Writer) {
 	var scanner = bufio.NewScanner(input)
+	var environment = object.NewEnivronment()
 
 	for {
 		fmt.Print(PROMPT)
@@ -38,7 +40,7 @@ func Start(input io.Reader, output io.Writer) {
 			continue
 		}
 
-		var evaluated = evaluator.Eval(program)
+		var evaluated = evaluator.Eval(program, environment)
 
 		if evaluated != nil {
 			io.WriteString(output, evaluated.Inspect())
