@@ -11,16 +11,17 @@ var (
 	FALSE = &object.Boolean{Value: false}
 )
 
-func Eval(node ast.Node, enivronment *object.Enivronment) object.Object {
+func Eval(node ast.Node, environment *object.Enivronment) object.Object {
 	switch node := node.(type) {
 	case *ast.Program:
 		return evalProgram(node)
 
 	case *ast.LetStatement:
-		var value = Eval(node.Value)
+		var value = Eval(node.Value, environment)
 		if isError(value) {
 			return value
 		}
+		environment.Set(node.Name.Value, value)
 
 	case *ast.BlockStatement:
 		return evalBlockStatement(node)
