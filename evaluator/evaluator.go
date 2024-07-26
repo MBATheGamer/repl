@@ -60,6 +60,15 @@ func Eval(node ast.Node, environment *object.Enivronment) object.Object {
 	case *ast.Identifier:
 		return evalIdentifier(node, environment)
 
+	case *ast.FunctionLiteral:
+		var parameters = node.Parameters
+		var body = node.Body
+		return &object.Function{
+			Parameters:  parameters,
+			Enivronment: environment,
+			Body:        body,
+		}
+
 	case *ast.IntegerLiteral:
 		return &object.Integer{Value: node.Value}
 
