@@ -69,6 +69,12 @@ func Eval(node ast.Node, environment *object.Enivronment) object.Object {
 			Body:        body,
 		}
 
+	case *ast.CallExpression:
+		var function = Eval(node.Function, environment)
+		if isError(function) {
+			return function
+		}
+
 	case *ast.IntegerLiteral:
 		return &object.Integer{Value: node.Value}
 
