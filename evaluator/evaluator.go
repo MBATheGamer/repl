@@ -104,6 +104,9 @@ func Eval(node ast.Node, environment *object.Enivronment) object.Object {
 		}
 		return evalIndexExpression(left, index)
 
+	case *ast.HashLiteral:
+		return evalHashLiteral(node, environment)
+
 	case *ast.Boolean:
 		return nativeBoolToBooleanObject(node.Value)
 	}
